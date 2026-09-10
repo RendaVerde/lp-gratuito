@@ -7,6 +7,7 @@
    03. Apresentação do cadastro gratuito
    04. Indicadores institucionais
    05. Estrutura compartilhada das seções
+   05.1. Simulador de cashback para clientes
    06. Soluções e benefícios
    07. Vídeos oficiais
    08. Cashback e diagrama de indicações
@@ -29,9 +30,14 @@
   --line: rgba(255, 255, 255, 0.12);
   --text: #f5f7f6;
   --muted: #aeb9b4;
-  --green: #86f100;
-  --green-2: #b8ff5f;
-  --ink: #091006;
+  /* Verde principal compartilhado com a identidade da outra LP. */
+  --green: #00F572;
+  --green-rgb: 0, 245, 114;
+  --green-2: #5CFFA8;
+  --green-dark: #007A3D;
+  --green-soft: #E0FFEE;
+  --green-border: #67D99C;
+  --ink: #041108;
   --white: #fff;
   --radius: 24px;
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
@@ -149,17 +155,17 @@ summary:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(134, 241, 0, 0.44);
+  outline: 3px solid rgba(var(--green-rgb), 0.44);
   outline-offset: 3px;
 }
 .btn-primary {
   background: var(--green);
   color: var(--ink);
-  box-shadow: 0 14px 38px rgba(134, 241, 0, 0.19);
+  box-shadow: 0 14px 38px rgba(var(--green-rgb), 0.19);
 }
 .btn-primary:hover {
   background: var(--green-2);
-  box-shadow: 0 18px 50px rgba(134, 241, 0, 0.25);
+  box-shadow: 0 18px 50px rgba(var(--green-rgb), 0.25);
 }
 .btn-small {
   min-height: 42px;
@@ -234,7 +240,7 @@ textarea:focus-visible {
   height: 7px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 0 6px rgba(134, 241, 0, 0.1);
+  box-shadow: 0 0 0 6px rgba(var(--green-rgb), 0.1);
 }
 h1,
 h2,
@@ -265,6 +271,36 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+/* Destaque do cadastro na posição original do hero. */
+.hero .hero-signup {
+  min-height: 64px;
+  max-width: 100%;
+  padding: 15px 30px;
+  border: 1px solid rgba(153, 255, 200, 0.65);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-align: center;
+  white-space: normal;
+  background: linear-gradient(135deg, var(--green-2), var(--green) 70%);
+  box-shadow:
+    0 0 0 4px rgba(var(--green-rgb), 0.08),
+    0 12px 32px rgba(var(--green-rgb), 0.24);
+}
+.hero .hero-signup:hover {
+  background: var(--green-2);
+  box-shadow:
+    0 0 0 4px rgba(var(--green-rgb), 0.13),
+    0 16px 36px rgba(var(--green-rgb), 0.28);
+}
+.hero .hero-signup:focus-visible {
+  outline: 3px solid #f5f7f6;
+  outline-offset: 5px;
+}
+.hero-actions .btn-ghost {
+  align-self: center;
 }
 .hero-assurance {
   margin-top: 24px;
@@ -407,6 +443,286 @@ h1 {
   text-align: center;
 }
 
+/* 05.1 · Simulador de cashback para clientes
+   ========================================================================== */
+.simulator {
+  scroll-margin-top: 86px;
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+.simulator [hidden] {
+  display: none !important;
+}
+.simulator-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.simulator-services {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.simulator-service {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-2);
+}
+.simulator-service-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.simulator-service-title img {
+  box-sizing: content-box;
+  padding: 7px;
+  border-radius: 10px;
+  background: var(--green);
+}
+.simulator-service-title h3 {
+  margin: 0;
+  font-size: 17px;
+}
+.simulator-rate {
+  color: var(--green-2);
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.simulator-service p,
+.simulator-result-note,
+.simulator-disclaimer,
+.simulator-error,
+.simulator-sources {
+  font-size: max(15px, 0.9375rem);
+  line-height: 1.55;
+  color: var(--muted);
+}
+.simulator-service > .simulator-service-note {
+  min-height: 47px;
+  margin: 10px 0 20px;
+}
+.simulator-service {
+  min-width: 0;
+}
+.simulator-field + .simulator-field {
+  margin-top: 18px;
+}
+.simulator label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: max(15px, 0.9375rem);
+  line-height: 1.4;
+  font-weight: 650;
+}
+.simulator-stepper {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  border: 1px solid #4d6357;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.simulator-stepper button {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  color: var(--green-2);
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+.simulator-stepper button:hover {
+  background: rgba(var(--green-rgb), 0.12);
+}
+.simulator-stepper button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.simulator-stepper input {
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--text);
+  background: transparent;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 750;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.simulator-stepper input::-webkit-inner-spin-button,
+.simulator-stepper input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+.simulator :is(button, input, select, summary, a):focus-visible {
+  outline: 2px solid var(--green-2);
+  outline-offset: 3px;
+}
+.simulator-stepper :is(button, input):focus-visible {
+  outline-offset: -3px;
+}
+.simulator input[aria-invalid="true"] {
+  outline: 2px solid #ffb4a8;
+  outline-offset: -2px;
+}
+.simulator-sources {
+  border-top: 1px solid var(--line);
+}
+.simulator summary {
+  padding: 18px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+}
+.simulator summary::marker {
+  color: var(--green);
+}
+.simulator-field {
+  min-width: 0;
+}
+.simulator-field > :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid #4d6357;
+  border-radius: 10px;
+  font-size: 16px;
+}
+.simulator-field p {
+  margin: 8px 0 0;
+}
+.simulator-result {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid rgba(var(--green-rgb), 0.35);
+  border-radius: 24px;
+  background: linear-gradient(145deg, #142C21, #101A15);
+}
+.simulator-total {
+  display: block;
+  margin: 16px 0 12px;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+.simulator-result-note {
+  margin: 10px 0 0;
+}
+.simulator-breakdown {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0;
+  font-size: 15px;
+}
+.simulator-breakdown > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+.simulator-breakdown dt {
+  color: var(--muted);
+}
+.simulator-breakdown dd {
+  margin: 0;
+  font-weight: 700;
+}
+.simulator-telecom-goal {
+  margin: 0 0 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--green-2);
+}
+.simulator-result .btn {
+  width: 100%;
+  white-space: normal;
+  padding-inline: 16px;
+  text-align: center;
+}
+.simulator-result .btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.simulator-disclaimer {
+  margin: 24px 0;
+  max-width: 1000px;
+}
+.simulator-error {
+  color: #ffb4a8;
+}
+.simulator-sources ul {
+  display: grid;
+  gap: 12px;
+  padding-left: 22px;
+  margin: 0 0 16px;
+}
+.simulator-sources a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--green-2);
+}
+@media (max-width: 1100px) {
+  .simulator-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .simulator-services {
+    grid-template-columns: 1fr;
+  }
+  .simulator-service {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    padding: 22px;
+    align-content: start;
+  }
+  .simulator-service-title {
+    margin: 0;
+  }
+  .simulator-rate {
+    align-self: center;
+    text-align: right;
+    font-size: 26px;
+  }
+  .simulator-service > .simulator-service-note {
+    grid-column: 1 / -1;
+    min-height: 0;
+    margin: 0;
+  }
+  .simulator-field + .simulator-field {
+    margin-top: 0;
+  }
+  .simulator-result {
+    padding: 24px 20px;
+  }
+}
+@media (max-width: 380px) {
+  .simulator-service {
+    grid-template-columns: 1fr;
+  }
+  .simulator-rate {
+    text-align: left;
+  }
+}
+
 /* 06 · Soluções e benefícios
    ========================================================================== */
 .benefits {
@@ -414,7 +730,7 @@ h1 {
   color: #0b100e;
 }
 .benefits .section-kicker {
-  color: #3e8700;
+  color: var(--green-dark);
 }
 .benefits .section-head > p {
   color: #58615d;
@@ -441,6 +757,10 @@ h1 {
 .benefit-card p {
   color: #5b6560;
 }
+/* Nos cartões claros, o tom profundo mantém os rótulos legíveis. */
+.benefit-card:not(.benefit-main) .card-kicker {
+  color: var(--green-dark);
+}
 .benefit-main {
   grid-row: span 2;
   min-height: 676px;
@@ -450,7 +770,7 @@ h1 {
   background:
     radial-gradient(
       circle at 80% 10%,
-      rgba(134, 241, 0, 0.25),
+      rgba(var(--green-rgb), 0.25),
       transparent 32%
     ),
     linear-gradient(145deg, #121a16, #080c0a);
@@ -465,7 +785,7 @@ h1 {
   place-items: center;
   margin-bottom: auto;
   border-radius: 15px;
-  color: #102000;
+  color: var(--ink);
   background: var(--green);
   font-size: 28px;
   font-weight: 800;
@@ -482,8 +802,8 @@ h1 {
   font-size: 12px;
 }
 .benefit-accent {
-  border-color: #92d641;
-  background: #eaffcd;
+  border-color: var(--green-border);
+  background: var(--green-soft);
 }
 
 /* 07 · Vídeos oficiais
@@ -587,7 +907,7 @@ h1 {
   position: absolute;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(134, 241, 0, 0.25);
+  border: 1px solid rgba(var(--green-rgb), 0.25);
   border-radius: 50%;
 }
 .orbit span {
@@ -653,7 +973,7 @@ h1 {
   border-radius: 28px;
   color: var(--ink);
   background: var(--green);
-  box-shadow: 0 0 70px rgba(134, 241, 0, 0.26);
+  box-shadow: 0 0 70px rgba(var(--green-rgb), 0.26);
   font-size: 48px;
 }
 @keyframes spin {
@@ -713,12 +1033,16 @@ h1 {
   grid-template-columns: 1fr 1fr;
   gap: 70px;
   padding: 56px;
+  border: 1px solid rgba(var(--green-rgb), 0.3);
   border-radius: 32px;
-  color: #0a100d;
-  background: var(--green);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 0 0, rgba(var(--green-rgb), 0.1), transparent 44%),
+    linear-gradient(135deg, #14241a, #0a120e 72%);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
 }
 .choice .section-kicker {
-  color: #315d00;
+  color: var(--green);
 }
 .choice h2 {
   font-size: clamp(36px, 4vw, 54px);
@@ -731,8 +1055,9 @@ h1 {
   display: flex;
   gap: 14px;
   padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  background: rgba(8, 20, 5, 0.08);
+  background: rgba(255, 255, 255, 0.045);
 }
 .choice-list i {
   width: 30px;
@@ -741,19 +1066,26 @@ h1 {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: var(--green);
-  background: #0c1608;
+  color: #0a120e;
+  background: var(--green);
   font-style: normal;
   font-weight: 900;
 }
 .choice-list span {
-  display: grid;
-  color: #315016;
+  display: block;
+  color: #b8c5be;
   font-size: 14px;
 }
 .choice-list strong {
-  color: #0a100d;
+  color: var(--text);
   font-size: 16px;
+}
+.choice-list span > strong:first-child {
+  display: block;
+}
+.choice-list .choice-highlight {
+  display: inline;
+  color: var(--green-2);
 }
 
 /* 11 · Perguntas frequentes
@@ -809,6 +1141,29 @@ h1 {
   padding: 0 45px 24px 0;
   color: var(--muted);
 }
+.faq-answer {
+  max-width: 700px;
+  padding: 0 45px 24px 0;
+  color: var(--muted);
+}
+.faq-answer p {
+  padding: 0;
+}
+.faq-topics {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding-left: 22px;
+}
+.faq-topics li {
+  padding-left: 4px;
+}
+.faq-topics li::marker {
+  color: var(--green);
+}
+.faq-topics strong {
+  color: var(--text);
+}
 
 /* 12 · Chamada final e rodapé
    ========================================================================== */
@@ -826,7 +1181,7 @@ h1 {
   top: 62%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: rgba(134, 241, 0, 0.12);
+  background: rgba(var(--green-rgb), 0.12);
   filter: blur(100px);
 }
 .closing-content {

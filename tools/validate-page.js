@@ -224,8 +224,9 @@ function validateClarityIntegration() {
     errors.push("O formulário de lead não está protegido pelo Clarity.");
   }
 
-  if (!script.includes('sheetSiteId: "cliente-gratuito-igreen"')) {
-    errors.push("Identificador exclusivo da planilha não encontrado.");
+  if (!script.includes('sheetSiteId: "rendaverde-igreen"') ||
+      !script.includes('landingPageId: "cliente-gratuito-igreen"')) {
+    errors.push("Identificador da integração ou origem da LP não encontrado.");
   }
 
   return {

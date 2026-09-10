@@ -12,6 +12,9 @@ explicação dos benefícios e captação de interessados pelo WhatsApp. Este pr
   global de legibilidade.
 - `script.js`: modal, máscara de telefone, analytics, montagem da mensagem de
   WhatsApp e persistência dos leads.
+- `simulator.js`: premissas, cálculo em centavos, controles e medição do simulador de clientes.
+- `docs/simulador.md`: fontes, fórmulas, hipóteses e decisão de posicionamento baseada na análise anterior do Clarity.
+- `tools/test-simulator.js`: testes do cálculo e limites do simulador.
 - `img/`: logo, favicon, imagem de abertura e ícones vetoriais das conexões.
 - `tools/validate-page.js`: validação automatizada da estrutura e das integrações.
 
@@ -22,6 +25,7 @@ HTML e no CSS, a ordem desses blocos acompanha a jornada visual da página.
 
 1. Apresentação do cadastro gratuito.
 2. Indicadores institucionais.
+   Simulador de indicações acessível também pelo hero e pela navegação.
 3. Soluções e benefícios.
 4. Vídeos explicativos do canal oficial da iGreen.
 5. Cashback por indicação.
@@ -37,7 +41,17 @@ As configurações externas ficam concentradas no objeto `CONFIG`, no início de
 
 - `whatsappNumber`: número que recebe os contatos;
 - `sheetEndpoint`: endpoint usado no envio para o Google Sheets;
-- `sheetSiteId`: identificador exclusivo desta LP na planilha.
+- `sheetSiteId`: identificador da integração existente (`rendaverde-igreen`);
+- `landingPageId`: origem exclusiva desta LP (`cliente-gratuito-igreen`).
+
+O envio replica o contrato da LP de referência: formulário URL-encoded com um
+campo `payload` contendo JSON, `tipo: "cliente"` e campos em português (`nome`,
+`whatsapp`, `cidade`, `interesse`, `perfil`, `observacao`). A simulação acompanha
+`observacao`, coluna já usada pelo formulário de clientes. `page_url` também
+identifica a origem. Ver [diagnóstico da integração](docs/integracao-leads.md).
+
+Retorno positivo de Beacon ou POST opaco não confirma gravação na planilha.
+Os eventos distinguem tentativa, transmissão e falha, sem emitir `lead_salvo`.
 
 Google Analytics e Microsoft Clarity são carregados no `<head>` de `index.html`.
 Os vídeos são incorporados pelo domínio de privacidade aprimorada do YouTube e
@@ -66,6 +80,9 @@ Execute:
 
 ```powershell
 node tools/validate-page.js
+node --check simulator.js
+node --test tools/test-simulator.js
+node --test tools/test-lead-integration.cjs
 ```
 
 O validador verifica:
@@ -75,7 +92,7 @@ O validador verifica:
 - IDs duplicados e associações entre labels, campos e JavaScript;
 - existência de todos os arquivos locais referenciados;
 - carregamento do Microsoft Clarity e proteção do formulário;
-- identificador exclusivo desta LP no envio para a planilha.
+- identificador da integração e origem desta LP no envio para a planilha.
 
 Além da validação automática, revise desktop e mobile depois de alterar layout,
 formulário, navegação, animações ou regras de responsividade.

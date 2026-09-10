@@ -40,9 +40,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>
-      Cliente Gratuito iGreen | Economia e benefícios para o seu dia a dia
-    </title>
+    <title>Start iGreen | Economia e benefícios para o seu dia a dia</title>
     <meta
       name="description"
       content="Cadastre-se gratuitamente como Cliente iGreen e conheça soluções de energia, telecom, seguros, clube de benefícios e cashback por indicações."
@@ -59,7 +57,7 @@
           ><img src="./img/igreen-logo.png" alt="iGreen Energy"
         /></a>
         <div class="nav-links" aria-label="Atalhos da página">
-          <a href="#beneficios">Benefícios</a
+          <a href="#beneficios">Benefícios</a><a href="#simulador">Simulador</a
           ><a href="#como-funciona">Como funciona</a
           ><a href="#duvidas">Dúvidas</a>
         </div>
@@ -77,7 +75,7 @@
         <div class="wrap hero-content">
           <div class="hero-copy">
             <span class="eyebrow"
-              ><i></i> Cliente Green Start · cadastro gratuito</span
+              ><i></i> Licenciado Green Start · cadastro gratuito</span
             >
             <h1>Economize no que já faz parte da sua vida.</h1>
             <p class="lead">
@@ -86,10 +84,15 @@
               cashback por indicações.
             </p>
             <div class="hero-actions">
-              <button class="btn btn-primary js-open-form" type="button">
-                QUERO ME CADASTRAR GRÁTIS →
+              <button
+                class="btn btn-primary hero-signup js-open-form"
+                type="button"
+              >
+                QUERO INICIAR GRÁTIS →
               </button>
-              <a class="btn btn-ghost" href="#beneficios">VER OS BENEFÍCIOS</a>
+              <a class="btn btn-ghost" href="#simulador"
+                >SIMULAR MEU CASHBACK</a
+              >
             </div>
             <div class="hero-assurance" aria-label="Condições principais">
               <span>✓ R$ 0 para entrar</span
@@ -131,6 +134,357 @@
           Dados institucionais publicados pela iGreen e consultados em agosto de
           2026.
         </p>
+      </section>
+
+      <!-- 03.1 · Simulador de cashback para clientes -->
+      <section
+        class="simulator section"
+        id="simulador"
+        aria-labelledby="simulator-title"
+      >
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">CLIENTE QUE INDICA</span>
+              <h2 id="simulator-title">
+                Suas indicações.<br />Mais benefícios todo mês.
+              </h2>
+            </div>
+            <p>
+              Escolha o valor mensal e quantos clientes quer indicar. Veja o
+              cashback na hora.
+            </p>
+          </div>
+          <noscript
+            ><p>
+              Ative o JavaScript para calcular. Você também pode consultar as
+              condições com nossa equipe.
+            </p></noscript
+          >
+          <div class="simulator-layout" data-simulator hidden>
+            <div class="simulator-controls">
+              <div class="simulator-services">
+                <div class="simulator-service">
+                  <div class="simulator-service-title">
+                    <img
+                      src="./img/icons/energy.svg"
+                      alt=""
+                      width="24"
+                      height="24"
+                    />
+                    <h3>Energia</h3>
+                  </div>
+                  <strong class="simulator-rate" data-sim-rate>1% a 2%</strong>
+                  <p class="simulator-service-note">
+                    Cashback conforme a distribuidora.
+                  </p>
+                  <div class="simulator-field">
+                    <label for="sim-energy-base">Boleto mensal (R$)</label>
+                    <input
+                      id="sim-energy-base"
+                      data-sim-field="energyBase"
+                      type="number"
+                      min="0"
+                      max="100000"
+                      step="0.01"
+                      value="200"
+                      inputmode="decimal"
+                      required
+                      aria-describedby="sim-energy-base-help sim-error"
+                    />
+                    <p id="sim-energy-base-help">
+                      Parcela elegível por cliente.
+                    </p>
+                  </div>
+                  <div class="simulator-field">
+                    <label for="sim-energy-count">Quantidade de clientes</label>
+                    <div class="simulator-stepper">
+                      <button
+                        type="button"
+                        data-sim-step="-1"
+                        data-sim-target="sim-energy-count"
+                        aria-label="Diminuir clientes de energia"
+                      >
+                        −
+                      </button>
+                      <input
+                        id="sim-energy-count"
+                        data-sim-field="energyCount"
+                        type="number"
+                        min="0"
+                        max="1000"
+                        step="1"
+                        value="10"
+                        inputmode="numeric"
+                        required
+                        aria-describedby="sim-error"
+                      />
+                      <button
+                        type="button"
+                        data-sim-step="1"
+                        data-sim-target="sim-energy-count"
+                        aria-label="Aumentar clientes de energia"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div class="simulator-field">
+                    <label for="sim-energy-rule">Cashback de energia</label>
+                    <select id="sim-energy-rule" data-sim-field="energyRule">
+                      <option value="range">1% a 2%</option>
+                      <option value="A">2% — regra A</option>
+                      <option value="B">1% — regra B</option>
+                      <option value="C">0,5% — rural / C</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="simulator-service">
+                  <div class="simulator-service-title">
+                    <img
+                      src="./img/icons/telecom.svg"
+                      alt=""
+                      width="24"
+                      height="24"
+                    />
+                    <h3>Telecom</h3>
+                  </div>
+                  <strong class="simulator-rate">R$ 3,50</strong>
+                  <p class="simulator-service-note">
+                    Cashback fixo por indicação paga.
+                  </p>
+                  <div class="simulator-field">
+                    <label for="sim-telecom-plan">Seu plano mensal (R$)</label>
+                    <input
+                      id="sim-telecom-plan"
+                      data-sim-field="telecomPlan"
+                      type="number"
+                      min="54.90"
+                      max="100000"
+                      step="0.01"
+                      value="54.90"
+                      inputmode="decimal"
+                      required
+                      aria-describedby="sim-telecom-plan-help sim-error"
+                    />
+                    <p id="sim-telecom-plan-help">A partir de R$ 54,90.</p>
+                  </div>
+                  <div class="simulator-field">
+                    <label for="sim-telecom-count"
+                      >Quantidade de clientes</label
+                    >
+                    <div class="simulator-stepper">
+                      <button
+                        type="button"
+                        data-sim-step="-1"
+                        data-sim-target="sim-telecom-count"
+                        aria-label="Diminuir clientes de telecom"
+                      >
+                        −
+                      </button>
+                      <input
+                        id="sim-telecom-count"
+                        data-sim-field="telecomCount"
+                        type="number"
+                        min="0"
+                        max="1000"
+                        step="1"
+                        value="10"
+                        inputmode="numeric"
+                        required
+                        aria-describedby="sim-error"
+                      />
+                      <button
+                        type="button"
+                        data-sim-step="1"
+                        data-sim-target="sim-telecom-count"
+                        aria-label="Aumentar clientes de telecom"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="simulator-service">
+                  <div class="simulator-service-title">
+                    <img
+                      src="./img/icons/insurance.svg"
+                      alt=""
+                      width="24"
+                      height="24"
+                    />
+                    <h3>Seguros</h3>
+                  </div>
+                  <strong class="simulator-rate">2,5%</strong>
+                  <p class="simulator-service-note">
+                    Taxa de simulação a confirmar.
+                  </p>
+                  <div class="simulator-field">
+                    <label for="sim-insurance-base">Seguro mensal (R$)</label>
+                    <input
+                      id="sim-insurance-base"
+                      data-sim-field="insuranceBase"
+                      type="number"
+                      min="0"
+                      max="100000"
+                      step="0.01"
+                      value="200"
+                      inputmode="decimal"
+                      required
+                      aria-describedby="sim-insurance-base-help sim-error"
+                    />
+                    <p id="sim-insurance-base-help">
+                      Base elegível por cliente.
+                    </p>
+                  </div>
+                  <div class="simulator-field">
+                    <label for="sim-insurance-count"
+                      >Quantidade de clientes</label
+                    >
+                    <div class="simulator-stepper">
+                      <button
+                        type="button"
+                        data-sim-step="-1"
+                        data-sim-target="sim-insurance-count"
+                        aria-label="Diminuir clientes de seguros"
+                      >
+                        −
+                      </button>
+                      <input
+                        id="sim-insurance-count"
+                        data-sim-field="insuranceCount"
+                        type="number"
+                        min="0"
+                        max="1000"
+                        step="1"
+                        value="10"
+                        inputmode="numeric"
+                        required
+                        aria-describedby="sim-error"
+                      />
+                      <button
+                        type="button"
+                        data-sim-step="1"
+                        data-sim-target="sim-insurance-count"
+                        aria-label="Aumentar clientes de seguros"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p
+                class="simulator-error"
+                id="sim-error"
+                role="status"
+                hidden
+              ></p>
+            </div>
+            <div class="simulator-result">
+              <div aria-live="polite" aria-atomic="true">
+                <span class="section-kicker">ESTIMATIVA MENSAL</span>
+                <output class="simulator-total" data-sim-total>—</output>
+                <p class="simulator-result-note">
+                  Estimativa com indicações pagas. Seguros a confirmar.
+                </p>
+                <dl class="simulator-breakdown">
+                  <div>
+                    <dt>Energia</dt>
+                    <dd data-sim-energy>—</dd>
+                  </div>
+                  <div>
+                    <dt>Telecom</dt>
+                    <dd data-sim-telecom>—</dd>
+                  </div>
+                  <div>
+                    <dt>Seguros · a confirmar</dt>
+                    <dd data-sim-insurance>—</dd>
+                  </div>
+                </dl>
+                <p class="simulator-telecom-goal" data-sim-goal></p>
+              </div>
+              <button class="btn btn-primary" type="button" data-sim-contact>
+                ANALISAR MINHA SIMULAÇÃO →
+              </button>
+              <p class="simulator-result-note">
+                Simulação livre. Converse com a equipe quando quiser.
+              </p>
+            </div>
+          </div>
+          <p class="simulator-disclaimer">
+            Estimativa condicionada a clientes ativos, pagamentos e
+            elegibilidade. Os benefícios têm regras de uso próprias e não
+            representam uma renda garantida ou um saldo único para saque. Em
+            Telecom, o cashback abate sua fatura e o excedente fica para as
+            próximas.
+          </p>
+          <details class="simulator-sources">
+            <summary>Como calculamos e quais referências usamos</summary>
+            <ul>
+              <li>
+                <strong>Energia:</strong> indicações × base mensal elegível ×
+                percentual. A faixa de 1% a 2% contempla os cenários A e B; há
+                opção de 0,5% para C/rural. Confira o
+                <a
+                  href="https://www.igreenenergy.com.br/cashback-sustentavel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >regulamento iGreen</a
+                >
+                para a sua distribuidora.
+              </li>
+              <li>
+                <strong>Telecom:</strong> indicações pagas × R$ 3,50, valor fixo
+                do
+                <a
+                  href="https://www.igreenenergy.com.br/cashback-telecom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >regulamento oficial</a
+                >. São necessárias 16 indicações pagas para gerar R$ 56,00 e
+                cobrir uma mensalidade de R$ 54,90, mantendo seu plano ativo.
+              </li>
+              <li>
+                <strong>Seguros:</strong> indicações × base mensal elegível ×
+                2,5%. Esse percentual é uma hipótese de simulação que deve ser
+                confirmada com a equipe; não foi validado em regulamento oficial
+                público nesta pesquisa.
+              </li>
+              <li>
+                <strong>Valores de partida:</strong> R$ 200 em Energia e R$ 200
+                em Seguros são exemplos editáveis, não médias nacionais nem
+                cotações. A
+                <a
+                  href="https://www.epe.gov.br/pt/areas-de-atuacao/energia-eletrica/consumo-de-energia-el%C3%A9trica"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >EPE</a
+                >
+                publica consumo em kWh e a
+                <a
+                  href="https://www.gov.br/aneel/pt-br/assuntos/tarifas/ranking-das-tarifas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >ANEEL</a
+                >
+                informa que suas tarifas não incluem todos os componentes da
+                conta. A
+                <a
+                  href="https://comercial.bpseguradora.com.br/bp-seguro-auto-v1/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >BP anuncia preços a partir de R$ 103,47/mês</a
+                >, o que não equivale a preço médio.
+              </li>
+            </ul>
+            <p>
+              Referências consultadas em 10/09/2026. Não entram na estimativa
+              bônus pontuais, campanhas temporárias ou o desconto na sua própria
+              energia.
+            </p>
+          </details>
+        </div>
       </section>
 
       <!-- 04 · Soluções e benefícios disponíveis -->
@@ -424,8 +778,12 @@
             <div>
               <i>✓</i
               ><span
-                ><strong>Indicação opcional</strong>Compartilhe somente se
-                quiser.</span
+                ><strong>Construa renda recorrente</strong>Compartilhe nossas
+                soluções com amigos e família e seja recompensado por isso
+                mensalmente.
+                <strong class="choice-highlight"
+                  >Indique uma vez e ganhe para sempre!</strong
+                ></span
               >
             </div>
           </div>
@@ -450,16 +808,28 @@
               </summary>
               <p>
                 Sim. A licença Cliente Green Start tem custo de entrada de R$ 0.
-                Serviços contratados podem ter cobranças próprias, apresentadas
-                antes da ativação.
+                Inicie sua jornada sendo cliente de uma das nossas soluções.
               </p>
             </details>
             <details>
               <summary>Preciso contratar todas as soluções?</summary>
-              <p>
-                Não. Você pode conhecer energia, telecom, seguros e benefícios e
-                escolher apenas as opções adequadas ao seu perfil.
-              </p>
+              <div class="faq-answer">
+                <p>Não. Você pode usar apenas um dos nossos serviços:</p>
+                <ul class="faq-topics">
+                  <li>
+                    <strong>Solução Energia:</strong> investimento de R$ 0 e
+                    economia de 10% a 20%.
+                  </li>
+                  <li>
+                    <strong>Telecom:</strong> use grátis os primeiros 30 dias
+                    realizando a portabilidade.
+                  </li>
+                  <li>
+                    <strong>Seguros:</strong> solução flexível com melhor
+                    custo-benefício.
+                  </li>
+                </ul>
+              </div>
             </details>
             <details>
               <summary>
@@ -468,6 +838,8 @@
               <p>
                 A disponibilidade e as condições dependem da distribuidora, da
                 região, do tipo de unidade consumidora e da análise aplicável.
+                Entre em contado com nossa equipe e verifique a disponibilidade
+                na sua cidade.
               </p>
             </details>
             <details>
@@ -481,9 +853,12 @@
             <details>
               <summary>Isso é uma licença comercial?</summary>
               <p>
-                Não. Esta página é voltada ao Cliente Green gratuito. O
-                licenciamento comercial é uma modalidade diferente, com
-                condições próprias.
+                Não. Esta oportunidade é voltada para quem quer iniciar sem
+                investimentos. Conforme você escalona e ganha habilidades, você
+                pode evoluir para uma licença que lhe garante mais vantagens,
+                resultados e premiações. O licenciamento comercial é uma
+                modalidade diferente, com condições próprias. Agende um horário
+                com um de nossos especialistas.
               </p>
             </details>
           </div>
@@ -652,6 +1027,7 @@
 
     <!-- 14 · Mensagens de retorno e comportamentos da página -->
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./simulator.js" defer></script>
     <script src="./script.js" defer></script>
   </body>
 </html>
