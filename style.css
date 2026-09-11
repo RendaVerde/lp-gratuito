@@ -31,12 +31,12 @@
   --text: #f5f7f6;
   --muted: #aeb9b4;
   /* Verde principal compartilhado com a identidade da outra LP. */
-  --green: #00F572;
+  --green: #00f572;
   --green-rgb: 0, 245, 114;
-  --green-2: #5CFFA8;
-  --green-dark: #007A3D;
-  --green-soft: #E0FFEE;
-  --green-border: #67D99C;
+  --green-2: #5cffa8;
+  --green-dark: #007a3d;
+  --green-soft: #e0ffee;
+  --green-border: #67d99c;
   --ink: #041108;
   --white: #fff;
   --radius: 24px;
@@ -609,7 +609,7 @@ h1 {
   padding: 28px;
   border: 1px solid rgba(var(--green-rgb), 0.35);
   border-radius: 24px;
-  background: linear-gradient(145deg, #142C21, #101A15);
+  background: linear-gradient(145deg, #142c21, #101a15);
 }
 .simulator-total {
   display: block;
@@ -1037,7 +1037,11 @@ h1 {
   border-radius: 32px;
   color: var(--text);
   background:
-    radial-gradient(circle at 0 0, rgba(var(--green-rgb), 0.1), transparent 44%),
+    radial-gradient(
+      circle at 0 0,
+      rgba(var(--green-rgb), 0.1),
+      transparent 44%
+    ),
     linear-gradient(135deg, #14241a, #0a120e 72%);
   box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
 }
@@ -1100,8 +1104,7 @@ h1 {
   gap: 90px;
 }
 .faq-intro {
-  position: sticky;
-  top: 120px;
+  position: static;
   align-self: start;
 }
 .faq-intro p {
@@ -1414,9 +1417,6 @@ footer {
     max-width: 500px;
     width: 100%;
     margin-inline: auto;
-  }
-  .faq-intro {
-    position: static;
   }
   .faq-grid {
     gap: 40px;
